@@ -6,7 +6,6 @@ uses
   DB,
   SqlExpr,
   DBXCommon,
-  DBXFirebird,
   Database.Connection.Interfaces,
   Classes,
   System.Variants;
@@ -43,7 +42,7 @@ type
 implementation
 
 uses
-  Vcl.Dialogs, System.SysUtils;
+  System.SysUtils;
 
 constructor TConnectionDBExpress.Create(Params: IConnectionParams);
 begin
