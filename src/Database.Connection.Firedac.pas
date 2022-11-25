@@ -18,14 +18,12 @@ uses
   FireDAC.Phys.FB,
   FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
-  FireDAC.Phys.SQLiteWrapper.Stat,
-  FireDAC.VCLUI.Wait,
+  FireDAC.Phys.SQLiteWrapper.Stat,  
   FireDAC.DApt,
   FireDAC.Comp.Client,
   FireDAC.Stan.Param,
   System.Classes,
-  System.SysUtils,
-  FireDAC.FMXUI.Wait,
+  System.SysUtils,  
   FireDAC.Comp.UI,
   Variants;
 
