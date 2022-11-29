@@ -37,6 +37,8 @@ type
     function GetHost: String;
     function SetPort(Value: String): IConnectionParams;
     function GetPort: String;
+	function SetCharset(Value: String): IConnectionParams;
+    function GetCharset: String;
   end;
 
   IConnectionFactory = interface
