@@ -34,7 +34,6 @@ type
       FConnectionFree: Boolean;
       FDataSource: TDataSource;
       FQuery: TFDQuery;
-      FTransaction: TFDTransaction;
       function GetConnection: TFDConnection;
   public
       constructor Create(Params: IConnectionParams); overload;
@@ -83,6 +82,9 @@ begin
 
   if Length(Trim(Params.GetPassword)) > 0 then
     FConnection.Params.Password := Params.GetPassword;
+
+  if Length(Trim(Params.GetPassword)) > 0 then
+    FConnection.Params.Add('CharacterSet=utf8');
 
   FConnection.LoginPrompt := false;
 

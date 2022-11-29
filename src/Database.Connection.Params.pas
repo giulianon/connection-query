@@ -10,6 +10,7 @@ type
       FHost: String;
       FPort: String;
       FDriver: String;
+      FCharset: String;
     public
       constructor Create;
       destructor Destroy; override;
@@ -26,6 +27,8 @@ type
       function GetHost: String;
       function SetPort(Value: String): IConnectionParams;
       function GetPort: String;
+      function SetCharset(Value: String): IConnectionParams;
+      function GetCharset: String;
   end;
 implementation
 { TConnectionParams }
@@ -36,6 +39,11 @@ destructor TConnectionParams.Destroy;
 begin
   inherited;
 end;
+function TConnectionParams.GetCharset: String;
+begin
+  Result := FCharset;
+end;
+
 function TConnectionParams.GetDatabase: String;
 begin
   Result := FDatabase;
@@ -67,6 +75,12 @@ class function TConnectionParams.New: IConnectionParams;
 begin
   Result := Self.Create;
 end;
+function TConnectionParams.SetCharset(Value: String): IConnectionParams;
+begin
+  Result := Self;
+  FCharset := Value;
+end;
+
 function TConnectionParams.SetDatabase(Value: String): IConnectionParams;
 begin
   Result := Self;
