@@ -21,7 +21,8 @@ type
       function GetConnection: TSQLConnection;
   public
       constructor Create(Params: IConnectionParams); overload;
-      constructor Create(Params: IConnectionParams; const Connection: IConnection); overload;
+      constructor Create; overload;
+      constructor Create(Connection: IConnection); overload;
       destructor Destroy; override;
       function Close: IConnection;
       function CommitTransaction: IConnection;
@@ -29,7 +30,7 @@ type
       function DataSet(Value: TDataSource):IConnection; overload;
       function ExecSQL: IConnection;
       class function New(Params: IConnectionParams): IConnection; overload;
-      class function New(Params: IConnectionParams; const Connection: IConnection): IConnection; overload;
+      class function New(const Connection: IConnection): IConnection; overload;
       function Open: IConnection;
       function ParamValue(Param: String; Value: TPersistent): IConnection; overload;
       function ParamValue(Param: String; Value: Variant): IConnection; overload;
@@ -46,42 +47,47 @@ uses
 
 constructor TConnectionDBExpress.Create(Params: IConnectionParams);
 begin
+  Create;
+
+  if Assigned(Params) then
+  begin
+    FConnection.DriverName := Params.GetDriver;
+
+    FConnection.Params.Clear;
+
+    FConnection.Params.Add('database=' + Params.GetDatabase);
+
+    if Length(Trim(Params.GetHost)) > 0 then
+      FConnection.Params.Add('server=' + Params.GetHost);
+
+    if Length(Trim(Params.GetPort)) > 0 then
+      FConnection.Params.Add('port=' + Params.GetPort);
+
+    if Length(Trim(Params.GetUser)) > 0 then
+      FConnection.Params.Add('user_name=' + Params.GetUser);
+
+    if Length(Trim(Params.GetPassword)) > 0 then
+      FConnection.Params.Add('password=' + Params.GetPassword);
+  end;
+end;
+
+constructor TConnectionDBExpress.Create(Connection: IConnection);
+begin
+  FConnection := TConnectionDBExpress(Connection).GetConnection;
+  Create;
+end;
+
+constructor TConnectionDBExpress.Create;
+begin
   FConnectionFree := False;
   if not Assigned(FConnection) then
   begin
     FConnection := TSQLConnection.Create(nil);
     FConnectionFree := True;
   end;
+  FConnection.LoginPrompt := false;
   FQuery := TSQLQuery.Create(nil);
   FQuery.SQLConnection := FConnection;
-
-  FConnection.DriverName := Params.GetDriver;
-
-  FConnection.Params.Clear;
-
-  FConnection.Params.Add('database=' + Params.GetDatabase);
-
-  if Length(Trim(Params.GetHost)) > 0 then
-    FConnection.Params.Add('server=' + Params.GetHost);
-
-  if Length(Trim(Params.GetPort)) > 0 then
-    FConnection.Params.Add('port=' + Params.GetPort);
-
-  if Length(Trim(Params.GetUser)) > 0 then
-    FConnection.Params.Add('user_name=' + Params.GetUser);
-
-  if Length(Trim(Params.GetPassword)) > 0 then
-    FConnection.Params.Add('password=' + Params.GetPassword);
-
-  FConnection.LoginPrompt := false;
-
-  FConnection.Connected := true;
-end;
-
-constructor TConnectionDBExpress.Create(Params: IConnectionParams; const Connection: IConnection);
-begin
-  FConnection := TConnectionDBExpress(Connection).GetConnection;
-  Create(Params);
 end;
 
 destructor TConnectionDBExpress.Destroy;
@@ -135,9 +141,9 @@ begin
   Result := Self.Create(Params);
 end;
 
-class function TConnectionDBExpress.New(Params: IConnectionParams; const Connection: IConnection): IConnection;
+class function TConnectionDBExpress.New(const Connection: IConnection): IConnection;
 begin
-  Result := Self.Create(Params, Connection);
+  Result := Self.Create(Connection);
 end;
 
 function TConnectionDBExpress.Open: IConnection;

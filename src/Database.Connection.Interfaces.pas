@@ -43,7 +43,7 @@ type
 
   IConnectionFactory = interface
     ['{A85BBC02-9511-4425-887B-02948409A880}']
-    function GetConnection(Params: IConnectionParams; const Connection: IConnection): IConnection; overload;
+    function GetConnection(const Connection: IConnection): IConnection; overload;
     function GetConnection(Params: IConnectionParams): IConnection; overload;
   end;
 
