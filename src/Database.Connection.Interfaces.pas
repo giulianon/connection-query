@@ -10,10 +10,11 @@ type
   IConnection = interface
     ['{C0B06135-820C-4B6F-9CB0-D9984D512E92}']
     function Close: IConnection;
-    function ParamValue(Param: String; Value: Variant): IConnection; overload;
-    function ParamValue(Param: String; Value: TPersistent): IConnection; overload;
+    function ParamValue(Param: String; const Value: Variant): IConnection; overload;
+    function ParamValue(Param: String; const Value: TPersistent): IConnection; overload;
+    function ParamAssign(Param: String; const Value: TStream): IConnection;
     function DataSet: TDataSet; overload;
-    function DataSet(Value: TDataSource):IConnection; overload;
+    function DataSet(const Value: TDataSource):IConnection; overload;
     function ExecSQL: IConnection;
     function Open: IConnection;
     function SQL(Value: String): IConnection;
@@ -37,14 +38,14 @@ type
     function GetHost: String;
     function SetPort(Value: String): IConnectionParams;
     function GetPort: String;
-	function SetCharset(Value: String): IConnectionParams;
+	  function SetCharset(Value: String): IConnectionParams;
     function GetCharset: String;
   end;
 
   IConnectionFactory = interface
     ['{A85BBC02-9511-4425-887B-02948409A880}']
     function GetConnection(const Connection: IConnection): IConnection; overload;
-    function GetConnection(Params: IConnectionParams): IConnection; overload;
+    function GetConnection(const Params: IConnectionParams): IConnection; overload;
   end;
 
 implementation

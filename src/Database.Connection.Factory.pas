@@ -10,7 +10,7 @@ type
   public
       constructor Create(DatabaseDriver: TDatabaseDriver);
       destructor Destroy; override;
-      function GetConnection(Params: IConnectionParams): IConnection; overload;
+      function GetConnection(const Params: IConnectionParams): IConnection; overload;
       function GetConnection(const Connection: IConnection): IConnection; overload;
       class function New(DatabaseDriver: TDatabaseDriver = ddFiredac): IConnectionFactory;
   end;
@@ -41,7 +41,7 @@ begin
   Result := FConnection;
 end;
 
-function TConnectionFactory.GetConnection(Params: IConnectionParams): IConnection;
+function TConnectionFactory.GetConnection(const Params: IConnectionParams): IConnection;
 begin
   if not Assigned(FConnection) then
   begin
