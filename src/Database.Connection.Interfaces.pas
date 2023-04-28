@@ -15,7 +15,7 @@ type
     function ParamAssign(Param: String; const Value: TStream): IConnection;
     function DataSet: TDataSet; overload;
     function DataSet(const Value: TDataSource):IConnection; overload;
-    function ExecSQL: IConnection;
+    function ExecSQL: Integer;
     function Open: IConnection;
     function SQL(Value: String): IConnection;
     function SQLClear: IConnection;

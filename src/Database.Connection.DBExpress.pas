@@ -25,7 +25,7 @@ type
       function CommitTransaction: IConnection;
       function DataSet: TDataSet; overload;
       function DataSet(const Value: TDataSource):IConnection; overload;
-      function ExecSQL: IConnection;
+      function ExecSQL: Integer;
       class function New(const Params: IConnectionParams): IConnection; overload;
       class function New(const Connection: IConnection): IConnection; overload;
       function Open: IConnection;
@@ -105,10 +105,10 @@ begin
   FDataSource := Value;
   FDataSource.DataSet := FQuery;
 end;
-function TConnectionDBExpress.ExecSQL: IConnection;
+function TConnectionDBExpress.ExecSQL: Integer;
 begin
-  Result := Self;
   FQuery.ExecSQL;
+  Result := FQuery.RowsAffected;
 end;
 function TConnectionDBExpress.GetConnection: TSQLConnection;
 begin
