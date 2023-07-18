@@ -23,7 +23,7 @@ uses
   System.Classes,
   System.SysUtils,  
   FireDAC.Phys.PGDef,
-  FireDAC.Phys.PG
+  FireDAC.Phys.PG,
   FireDAC.Comp.UI,
   Variants;
 type
