@@ -22,6 +22,8 @@ uses
   FireDAC.Stan.Param,
   System.Classes,
   System.SysUtils,  
+  FireDAC.Phys.PGDef,
+  FireDAC.Phys.PG
   FireDAC.Comp.UI,
   Variants;
 type
