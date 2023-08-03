@@ -10,6 +10,11 @@ type
   IConnection = interface
     ['{C0B06135-820C-4B6F-9CB0-D9984D512E92}']
     function Close: IConnection;
+    function ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection; overload;
+    function ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection; overload;
+    function ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection; overload;
+    function ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection; overload;
+    function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
     function ParamValue(Param: String; const Value: Variant): IConnection; overload;
     function ParamValue(Param: String; const Value: TPersistent): IConnection; overload;
     function ParamAssign(Param: String; const Value: TStream): IConnection;

@@ -31,6 +31,11 @@ type
       function Open: IConnection;
       function ParamValue(Param: String; const Value: TPersistent): IConnection; overload;
       function ParamValue(Param: String; const Value: Variant): IConnection; overload;
+      function ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection; overload;
+      function ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection; overload;
+      function ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection; overload;
+      function ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection; overload;
+      function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
       function ParamAssign(Param: String; const Value: TStream): IConnection;
       function RollbackTransaction: IConnection;
       function SQL(Value: String): IConnection;
@@ -142,6 +147,55 @@ begin
     FQuery.ParamByName(Param).DataType := ftBlob;
     FQuery.ParamByName(Param).Clear;
   end;
+end;
+function TConnectionDBExpress.ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftBoolean;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsBoolean := Value;
+end;
+
+function TConnectionDBExpress.ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftDateTime;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsDateTime := Value;
+end;
+
+function TConnectionDBExpress.ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftBCD;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsBCD := Value;
+end;
+
+function TConnectionDBExpress.ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftLargeint;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsLargeInt := Value;
+end;
+
+function TConnectionDBExpress.ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftString;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsString := Value;
 end;
 
 function TConnectionDBExpress.ParamValue(Param: String; const Value: Variant): IConnection;

@@ -1,6 +1,7 @@
 unit Database.Connection.Firedac;
 interface
 uses
+  System.DateUtils,
   Data.DB,
   Database.Connection.Interfaces,
   FireDAC.Stan.Intf,
@@ -25,7 +26,8 @@ uses
   FireDAC.Phys.PGDef,
   FireDAC.Phys.PG,
   FireDAC.Comp.UI,
-  Variants;
+  Variants,
+  FireDAC.VCLUI.Wait;
 type
   TConnectionFiredac = class(TInterfacedObject, IConnection)
   private
@@ -49,6 +51,11 @@ type
       function Open: IConnection;
       function ParamValue(Param: String; const Value: TPersistent): IConnection; overload;
       function ParamValue(Param: String; const Value: Variant): IConnection; overload;
+      function ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection; overload;
+      function ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection; overload;
+      function ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection; overload;
+      function ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection; overload;
+      function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
       function ParamAssign(Param: String; const Value: TStream): IConnection;
       function RollbackTransaction: IConnection;
       function SQL(Value: String): IConnection;
@@ -160,13 +167,63 @@ begin
     FQuery.ParamByName(Param).Clear;
   end;
 end;
+function TConnectionFiredac.ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftBoolean;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsBoolean := Value;
+end;
+
+function TConnectionFiredac.ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftDateTime;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsDateTime := Value;
+end;
+
+function TConnectionFiredac.ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftBCD;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsBCD := Value;
+end;
+
+function TConnectionFiredac.ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftLargeint;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsLargeInt := Value;
+end;
+
+function TConnectionFiredac.ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftString;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsString := Value;
+end;
 
 function TConnectionFiredac.ParamValue(Param: String; const Value: Variant): IConnection;
 begin
   Result := Self;
   if VarIsNull(Value) then
   begin
-    FQuery.ParamByName(Param).AsString := '';
+    FQuery.ParamByName(Param).Bound := False;
+    FQuery.ParamByName(Param).DataType := ftLargeint;
     FQuery.ParamByName(Param).Clear;
   end
   else
