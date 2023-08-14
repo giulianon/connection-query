@@ -26,8 +26,7 @@ uses
   FireDAC.Phys.PGDef,
   FireDAC.Phys.PG,
   FireDAC.Comp.UI,
-  Variants,
-  FireDAC.VCLUI.Wait;
+  Variants;
 type
   TConnectionFiredac = class(TInterfacedObject, IConnection)
   private
