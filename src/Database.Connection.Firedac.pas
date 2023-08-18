@@ -22,10 +22,12 @@ uses
   FireDAC.Comp.Client,
   FireDAC.Stan.Param,
   System.Classes,
-  System.SysUtils,  
+  System.SysUtils,
+  FireDAC.Comp.UI,
+  {$IFDEF MSWINDOWS}
   FireDAC.Phys.PGDef,
   FireDAC.Phys.PG,
-  FireDAC.Comp.UI,
+  {$ENDIF}
   Variants;
 type
   TConnectionFiredac = class(TInterfacedObject, IConnection)
