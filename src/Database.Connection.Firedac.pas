@@ -15,6 +15,7 @@ uses
   FireDAC.Phys,
   FireDAC.Phys.SQLite,
   FireDAC.Phys.FB,
+  FireDAC.Phys.MSSQL,
   FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteWrapper.Stat,  

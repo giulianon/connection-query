@@ -50,7 +50,6 @@ begin
     .ParamDatetime('data_validade', Date)
     .ParamBoolean('disponivel', true)
     .ExecSQL;
-
   ConsultarButton.Click;
 end;
 
@@ -74,7 +73,6 @@ begin
       .SetDatabase('../../exemplo.fdb')
       .SetUser('SYSDBA')
       .SetPassword('masterkey');
-
   FQuery := TConnectionFactory
     .New
     .GetConnection(FConnectionParams);
