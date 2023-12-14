@@ -4,8 +4,8 @@
     <Transaction>2023/07/27 12:05:27.000.872,=C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.pas</Transaction>
     <Transaction>2023/08/03 11:46:17.000.034,=C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.pas</Transaction>
     <Transaction>2023/08/11 09:20:50.000.860,=C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.pas</Transaction>
-    <Transaction>2023/08/11 09:22:32.000.717,C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.dfm=C:\projetos\classes\connection-query\example\unMain.dfm</Transaction>
-    <Transaction>2023/08/11 09:22:32.000.717,C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.pas=C:\projetos\classes\connection-query\example\unMain.pas</Transaction>
-    <Transaction>2023/08/11 09:22:49.000.513,C:\Users\giu\Documents\Embarcadero\Studio\Projects\Project21.dproj=C:\projetos\classes\connection-query\example\CQExample.dproj</Transaction>
+    <Transaction>2023/08/11 09:22:32.000.717,C:\projetos\classes\connection-query\example\unMain.pas=C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.pas</Transaction>
+    <Transaction>2023/08/11 09:22:32.000.717,C:\projetos\classes\connection-query\example\unMain.dfm=C:\Users\giu\Documents\Embarcadero\Studio\Projects\Unit33.dfm</Transaction>
+    <Transaction>2023/08/11 09:22:49.000.513,C:\projetos\classes\connection-query\example\CQExample.dproj=C:\Users\giu\Documents\Embarcadero\Studio\Projects\Project21.dproj</Transaction>
   </Transactions>
 </BorlandProject>

@@ -35,6 +35,7 @@ type
       function ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection; overload;
       function ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection; overload;
       function ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection; overload;
+      function ParamTime(Param: String; const Value: TTime; Null: Boolean = False): IConnection; overload;
       function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
       function ParamAssign(Param: String; const Value: TStream): IConnection;
       function RollbackTransaction: IConnection;
@@ -196,6 +197,16 @@ begin
     FQuery.ParamByName(Param).Clear
   else
     FQuery.ParamByName(Param).AsString := Value;
+end;
+
+function TConnectionDBExpress.ParamTime(Param: String; const Value: TTime; Null: Boolean): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftTime;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsTime := Value;
 end;
 
 function TConnectionDBExpress.ParamValue(Param: String; const Value: Variant): IConnection;

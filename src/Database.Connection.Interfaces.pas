@@ -14,6 +14,7 @@ type
     function ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection; overload;
     function ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection; overload;
     function ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection; overload;
+    function ParamTime(Param: String; const Value: TTime; Null: Boolean = False): IConnection; overload;
     function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
     function ParamValue(Param: String; const Value: Variant): IConnection; overload;
     function ParamValue(Param: String; const Value: TPersistent): IConnection; overload;

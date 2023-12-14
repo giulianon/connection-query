@@ -15,7 +15,6 @@ uses
   FireDAC.Phys,
   FireDAC.Phys.SQLite,
   FireDAC.Phys.FB,
-  FireDAC.Phys.MSSQL,
   FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs,
   FireDAC.Phys.SQLiteWrapper.Stat,  
@@ -23,13 +22,12 @@ uses
   FireDAC.Comp.Client,
   FireDAC.Stan.Param,
   System.Classes,
-  System.SysUtils,
-  FireDAC.Comp.UI,
-  {$IFDEF MSWINDOWS}
+  System.SysUtils,  
   FireDAC.Phys.PGDef,
   FireDAC.Phys.PG,
-  {$ENDIF}
-  Variants;
+  FireDAC.Comp.UI,
+  Variants,
+  FireDAC.VCLUI.Wait;
 type
   TConnectionFiredac = class(TInterfacedObject, IConnection)
   private
@@ -57,6 +55,7 @@ type
       function ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection; overload;
       function ParamBoolean(Param: String; const Value: Boolean; Null: Boolean = False): IConnection; overload;
       function ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection; overload;
+      function ParamTime(Param: String; const Value: TTime; Null: Boolean = False): IConnection; overload;
       function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
       function ParamAssign(Param: String; const Value: TStream): IConnection;
       function RollbackTransaction: IConnection;
@@ -217,6 +216,16 @@ begin
     FQuery.ParamByName(Param).Clear
   else
     FQuery.ParamByName(Param).AsString := Value;
+end;
+
+function TConnectionFiredac.ParamTime(Param: String; const Value: TTime; Null: Boolean): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftTime;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsTime := Value;
 end;
 
 function TConnectionFiredac.ParamValue(Param: String; const Value: Variant): IConnection;
