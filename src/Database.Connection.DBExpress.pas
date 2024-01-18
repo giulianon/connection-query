@@ -158,7 +158,6 @@ begin
   else
     FQuery.ParamByName(Param).AsBoolean := Value;
 end;
-
 function TConnectionDBExpress.ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -168,7 +167,6 @@ begin
   else
     FQuery.ParamByName(Param).AsDateTime := Value;
 end;
-
 function TConnectionDBExpress.ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -178,7 +176,6 @@ begin
   else
     FQuery.ParamByName(Param).AsBCD := Value;
 end;
-
 function TConnectionDBExpress.ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -188,7 +185,6 @@ begin
   else
     FQuery.ParamByName(Param).AsLargeInt := Value;
 end;
-
 function TConnectionDBExpress.ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -198,7 +194,6 @@ begin
   else
     FQuery.ParamByName(Param).AsString := Value;
 end;
-
 function TConnectionDBExpress.ParamTime(Param: String; const Value: TTime; Null: Boolean): IConnection;
 begin
   Result := Self;

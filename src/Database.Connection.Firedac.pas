@@ -260,6 +260,7 @@ begin
 end;
 function TConnectionFiredac.StartTransaction: IConnection;
 begin
+  Result := self;
   FConnection.StartTransaction;
 end;
 end.
