@@ -23,8 +23,10 @@ uses
   FireDAC.Stan.Param,
   System.Classes,
   System.SysUtils,  
+  {$IFDEF MSWINDOWS}
   FireDAC.Phys.PGDef,
   FireDAC.Phys.PG,
+  {$ENDIF}  
   FireDAC.Comp.UI,
   Variants,
   FireDAC.VCLUI.Wait;

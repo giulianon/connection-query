@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Database.Connection.Interfaces, Vcl.StdCtrls, FireDAC.UI.Intf,
-  FireDAC.VCLUI.Wait, FireDAC.Stan.Intf, FireDAC.Comp.UI, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  FireDAC.VCLUI.Wait, FireDAC.Stan.Intf, FireDAC.Comp.UI, Data.DB, Vcl.Grids, Vcl.DBGrids, Data.DBXFirebird,
+  Data.SqlExpr, MidasLib;
 
 type
   TfmMain = class(TForm)
@@ -31,7 +32,7 @@ var
 implementation
 
 uses
-  Database.Connection.Params, Database.Connection.Factory;
+  Database.Connection.Params, Database.Connection.Factory, Database.Enums;
 
 {$R *.dfm}
 
@@ -68,13 +69,13 @@ begin
   FConnectionParams :=
     TConnectionParams
       .New
-      .SetDriver('FB')
+      .SetDriver('Firebird')
       .SetCharset('CharacterSet=utf8')
       .SetDatabase('../../exemplo.fdb')
       .SetUser('SYSDBA')
       .SetPassword('masterkey');
   FQuery := TConnectionFactory
-    .New
+    .New(ddDBExpress)
     .GetConnection(FConnectionParams);
 end;
 
