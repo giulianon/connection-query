@@ -38,9 +38,12 @@ type
       function ParamTime(Param: String; const Value: TTime; Null: Boolean = False): IConnection; overload;
       function ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection; overload;
       function ParamAssign(Param: String; const Value: TStream): IConnection;
+      function ParamUUID(Param: String; const Value: String; Null: Boolean = False): IConnection;
       function RollbackTransaction: IConnection;
-      function SQL(Value: String): IConnection;
+      function SQL(Value: String): IConnection; overload;
+      function SQL: String; overload;
       function SQLClear: IConnection;
+      function SQLText(Value: String): IConnection;
       function StartTransaction: IConnection;
   end;
 implementation
@@ -204,6 +207,17 @@ begin
     FQuery.ParamByName(Param).AsTime := Value;
 end;
 
+function TConnectionDBExpress.ParamUUID(Param: String; const Value: String;
+  Null: Boolean): IConnection;
+begin
+  Result := Self;
+  FQuery.ParamByName(Param).DataType := ftGuid;
+  if Null then
+    FQuery.ParamByName(Param).Clear
+  else
+    FQuery.ParamByName(Param).AsGUID := StringToGUID(Value);
+end;
+
 function TConnectionDBExpress.ParamValue(Param: String; const Value: Variant): IConnection;
 begin
   Result := Self;
@@ -218,21 +232,36 @@ begin
     FQuery.ParamByName(Param).Value := Value;
   end;
 end;
+
 function TConnectionDBExpress.RollbackTransaction: IConnection;
 begin
   Result := Self;
   FConnection.RollbackIncompleteFreeAndNil(FTransaction);
 end;
+
 function TConnectionDBExpress.SQL(Value: String): IConnection;
 begin
   Result := Self;
   FQuery.SQL.Add(Value);
 end;
+
+function TConnectionDBExpress.SQL: String;
+begin
+  Result := FQuery.SQL.Text;
+end;
+
 function TConnectionDBExpress.SQLClear: IConnection;
 begin
   Result := Self;
   FQuery.SQL.Clear;
 end;
+
+function TConnectionDBExpress.SQLText(Value: String): IConnection;
+begin
+  Result :=self;
+  FQuery.SQL.Text := Value;
+end;
+
 function TConnectionDBExpress.StartTransaction: IConnection;
 begin
   Result := Self;

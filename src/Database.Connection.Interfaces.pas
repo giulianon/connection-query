@@ -19,12 +19,15 @@ type
     function ParamValue(Param: String; const Value: Variant): IConnection; overload;
     function ParamValue(Param: String; const Value: TPersistent): IConnection; overload;
     function ParamAssign(Param: String; const Value: TStream): IConnection;
+    function ParamUUID(Param: String; const Value: String; Null: Boolean = False): IConnection;
     function DataSet: TDataSet; overload;
     function DataSet(const Value: TDataSource):IConnection; overload;
     function ExecSQL: Integer;
     function Open: IConnection;
-    function SQL(Value: String): IConnection;
+    function SQL(Value: String): IConnection; overload;
+    function SQL: String; overload;
     function SQLClear: IConnection;
+    function SQLText(Value: String): IConnection;
     function StartTransaction: IConnection;
     function CommitTransaction: IConnection;
     function RollbackTransaction: IConnection;
