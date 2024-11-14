@@ -206,7 +206,6 @@ begin
   else
     FQuery.ParamByName(Param).AsTime := Value;
 end;
-
 function TConnectionDBExpress.ParamUUID(Param: String; const Value: String;
   Null: Boolean): IConnection;
 begin
@@ -232,19 +231,16 @@ begin
     FQuery.ParamByName(Param).Value := Value;
   end;
 end;
-
 function TConnectionDBExpress.RollbackTransaction: IConnection;
 begin
   Result := Self;
   FConnection.RollbackIncompleteFreeAndNil(FTransaction);
 end;
-
 function TConnectionDBExpress.SQL(Value: String): IConnection;
 begin
   Result := Self;
   FQuery.SQL.Add(Value);
 end;
-
 function TConnectionDBExpress.SQL: String;
 begin
   Result := FQuery.SQL.Text;
@@ -255,7 +251,6 @@ begin
   Result := Self;
   FQuery.SQL.Clear;
 end;
-
 function TConnectionDBExpress.SQLText(Value: String): IConnection;
 begin
   Result :=self;

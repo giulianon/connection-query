@@ -105,7 +105,9 @@ begin
       FConnection.Params.UserName := Params.GetUser;
     if Length(Trim(Params.GetPassword)) > 0 then
       FConnection.Params.Password := Params.GetPassword;
-    if Length(Trim(Params.GetPassword)) > 0 then
+    if Length(Trim(Params.GetCharset)) > 0 then
+      FConnection.Params.Add(Params.GetCharset)
+    else
       FConnection.Params.Add('CharacterSet=utf8');
   end;
 end;
@@ -182,7 +184,6 @@ begin
   else
     FQuery.ParamByName(Param).AsBoolean := Value;
 end;
-
 function TConnectionFiredac.ParamDatetime(Param: String; const Value: TDatetime; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -192,7 +193,6 @@ begin
   else
     FQuery.ParamByName(Param).AsDateTime := Value;
 end;
-
 function TConnectionFiredac.ParamDouble(Param: String; const Value: Double; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -202,7 +202,6 @@ begin
   else
     FQuery.ParamByName(Param).AsBCD := Value;
 end;
-
 function TConnectionFiredac.ParamInteger(Param: String; const Value: Largeint; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -212,7 +211,6 @@ begin
   else
     FQuery.ParamByName(Param).AsLargeInt := Value;
 end;
-
 function TConnectionFiredac.ParamString(Param: String; const Value: String; Null: Boolean = False): IConnection;
 begin
   Result := Self;
@@ -222,7 +220,6 @@ begin
   else
     FQuery.ParamByName(Param).AsString := Value;
 end;
-
 function TConnectionFiredac.ParamTime(Param: String; const Value: TTime; Null: Boolean): IConnection;
 begin
   Result := Self;
@@ -232,7 +229,6 @@ begin
   else
     FQuery.ParamByName(Param).AsTime := Value;
 end;
-
 function TConnectionFiredac.ParamUUID(Param: String; const Value: String;
   Null: Boolean): IConnection;
 begin
@@ -259,19 +255,16 @@ begin
     FQuery.ParamByName(Param).Value := Value;
   end;
 end;
-
 function TConnectionFiredac.RollbackTransaction: IConnection;
 begin
   Result := Self;
   FConnection.Rollback;
 end;
-
 function TConnectionFiredac.SQL(Value: String): IConnection;
 begin
   Result := Self;
   FQuery.SQL.Add(Value);
 end;
-
 function TConnectionFiredac.SQL: String;
 begin
   Result := FQuery.SQL.Text;
@@ -282,7 +275,6 @@ begin
   Result := Self;
   FQuery.SQL.Clear;
 end;
-
 function TConnectionFiredac.SQLText(Value: String): IConnection;
 begin
   Result := self;
@@ -294,5 +286,4 @@ begin
   Result := self;
   FConnection.StartTransaction;
 end;
-
 end.
